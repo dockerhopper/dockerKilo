@@ -3,7 +3,7 @@
 ![DockerKilo Demo](demo.gif)
 
 ## Overview
-DockerKilo is a fork of the Kilo text editor with multi-buffer support, improved syntax highlighting, and advanced file management capabilities. DockerKilo maintains Kilo's lightweight philosophy while adding some interesting features
+DockerKilo is a fork of the Kilo text editor with multi-buffer support, and advanced file management. dockerKilo adds to the original Kilo text editor.
 
 ## Key Features
 
@@ -12,7 +12,7 @@ DockerKilo introduces a revolutionary buffer system allowing simultaneous editin
 
 - **10 simultaneous buffers** with `Ctrl-B` to create new buffers
 - **Cyclical navigation** with `Ctrl-N` (next) and `Ctrl-P` (previous)
-- **Intelligent buffer closing** with `Ctrl-W` including save prompts
+- **buffer closing** with `Ctrl-W` including save prompts
 - **Persistent cursor positions** maintained per buffer
 - **Visual buffer indicators** in status bar: `[current/total]`
 
@@ -23,44 +23,7 @@ struct editorConfig {
     int num_buffers;
 };
 ```
-# Buffer Implementation 
-Buffer, implementation that keeps local constants with regards to each individual buffer. It allows for multiple files to be open at the same time
-while maintaining read/write capabilities over all of them
-```c
-#define MAX_BUFFERS 10  // Maximum number of open buffers
 
-struct editorBuffer {
-    int cx, cy;         // Cursor position
-    int rx;             // Render index
-    int rowoff;         // Row offset for scrolling
-    int coloff;         // Column offset for scrolling
-    int numrows;        // Number of rows
-    erow *row;          // Row data
-    int dirty;          // Unsaved changes flag
-    char *filename;     // Current filename
-    struct editorSyntax *syntax;  // Syntax highlighting rules
-};
-```
-# Key Features
-#### 1. Multi-Buffer Management
-DockerKilo introduces a revolutionary buffer system allowing simultaneous editing of multiple files:
-
-```c
-struct editorConfig {
-    struct editorBuffer buffers[MAX_BUFFERS];
-    int current_buffer;
-    int num_buffers;
-};
-```
-10 simultaneous buffers with Ctrl-B to create new buffers
-
-Cyclical navigation with Ctrl-N (next) and Ctrl-P (previous)
-
-Intelligent buffer closing with Ctrl-W including save prompts
-
-Persistent cursor positions maintained per buffer
-
-Visual buffer indicators in status bar: [current/total]
 
 #### 2. Enhanced Syntax Highlighting
 Advanced parsing engine with language detection:
@@ -86,7 +49,7 @@ Language auto-detection based on file extension
 
 Customizable color schemes via editorSyntaxToColor()
 
-#### 3. Advanced Rendering System
+#### 3. Rendering System
 Efficient screen rendering with optimized display algorithms:
 
 ```c
@@ -254,17 +217,5 @@ Buffer Management System
 - Efficient Searching: Boyer-Moore inspired algorithm
 
 
-# Future Roadmap
-- Split window support
-
-- Copy/paste functionality
-
-- Config file support
-
-- Plugin system
-
-- Terminal color scheme adaptation
-
-- ANSI escape sequence rendering
 
 Kilo was written by Salvatore Sanfilippo aka antirez and is released under the BSD 2 clause license.
